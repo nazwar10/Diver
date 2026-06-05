@@ -23,7 +23,8 @@
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 
     {{-- Vite Assets --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -35,24 +36,26 @@
         :root {
             --color-cream: #F8FAFC;
             --color-cream-2: #EEF2F6;
-            --color-charcoal: #111826;
-            --color-charcoal-2: #1F2937;
-            --color-mid: #64748B;
-            --color-light: #CBD5E1;
-            --color-accent: #31C4F3;
-            --color-dark-bg: #0B111D;
+            --color-charcoal: #0A192F;
+            --color-charcoal-2: #112240;
+            --color-mid: #8892B0;
+            --color-light: #CCD6F6;
+            --color-accent: #14C8F0;
+            --color-accent-lime: #A5F56D;
+            --color-accent-pink: #FF007F;
+            --color-dark-bg: #020C1B;
         }
 
         * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Satoshi', sans-serif;
             background-color: var(--color-cream);
             color: var(--color-charcoal);
         }
 
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .font-sans { font-family: 'DM Sans', sans-serif; }
+        .font-serif { font-family: 'Satoshi', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .font-sans { font-family: 'Satoshi', sans-serif; }
         .font-mono { font-family: 'IBM Plex Mono', monospace; }
 
         .text-cream { color: var(--color-cream); }
@@ -81,6 +84,13 @@
         /* Hide scrollbar but keep functionality */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Fix text clipping on split-word descenders (like g, p, y) */
+        .split-word {
+            display: inline-block;
+            padding-bottom: 0.2em;
+            margin-bottom: -0.2em;
+        }
 
         /* Animated underline */
         .animated-underline {

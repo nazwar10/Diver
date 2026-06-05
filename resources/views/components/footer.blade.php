@@ -1,5 +1,5 @@
 {{-- Footer --}}
-<footer class="bg-charcoal text-cream pt-24 pb-8" style="background-color: var(--color-charcoal); color: var(--color-cream);">
+<footer class="bg-dark-bg text-white pt-24 pb-8" style="background-color: var(--color-dark-bg); color: #FFF;">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         {{-- Top Section --}}

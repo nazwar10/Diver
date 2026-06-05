@@ -12,15 +12,15 @@ export default {
         extend: {
             colors: {
                 cream: { DEFAULT: '#F8FAFC', 2: '#EEF2F6' },
-                charcoal: { DEFAULT: '#111826', 2: '#1F2937' },
-                mid: '#64748B',
-                light: '#CBD5E1',
-                accent: { DEFAULT: '#31C4F3', light: '#E0F2FE' },
-                'dark-bg': '#0B111D',
+                charcoal: { DEFAULT: '#0A192F', 2: '#112240' },
+                mid: '#8892B0',
+                light: '#CCD6F6',
+                accent: { DEFAULT: '#14C8F0', lime: '#A5F56D', pink: '#FF007F' },
+                'dark-bg': '#020C1B',
             },
             fontFamily: {
-                serif: ['"Playfair Display"', ...defaultTheme.fontFamily.serif],
-                sans: ['"DM Sans"', ...defaultTheme.fontFamily.sans],
+                serif: ['"Satoshi"', ...defaultTheme.fontFamily.sans],
+                sans: ['"Satoshi"', ...defaultTheme.fontFamily.sans],
                 mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
             },
             fontSize: {

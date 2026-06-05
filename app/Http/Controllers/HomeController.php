@@ -50,22 +50,28 @@ class HomeController extends Controller
         // Services data
         $services = collect([
             (object)[
-                'title' => 'Web Design & Development',
-                'slug' => 'web-design',
-                'description' => 'We design and build bespoke websites that are beautiful, functional, and built to convert. From brand-led microsites to full-scale ecommerce platforms.',
-                'sub_services' => ['UX/UI Design', 'WordPress', 'Shopify', 'Laravel', 'Headless CMS', 'Ecommerce'],
+                'title' => 'Social Media Management',
+                'slug' => 'social-media',
+                'description' => 'We curate, manage, and grow your brand\'s social presence. From compelling content creation to community engagement, we build loyal audiences that convert.',
+                'sub_services' => ['Content Strategy', 'Community Management', 'Platform Growth', 'Influencer Outreach', 'Analytics'],
             ],
             (object)[
-                'title' => 'Branding & Identity',
-                'slug' => 'branding',
-                'description' => 'Strategic brand development that gives your business a distinct voice, look, and feel. We create brands that resonate and endure.',
-                'sub_services' => ['Brand Strategy', 'Visual Identity', 'Logo Design', 'Brand Guidelines', 'Tone of Voice', 'Packaging'],
+                'title' => 'Digital Ads',
+                'slug' => 'digital-ads',
+                'description' => 'Data-driven performance marketing campaigns. We optimize your ad spend across Google, Meta, and TikTok to deliver measurable ROI and high-quality leads.',
+                'sub_services' => ['PPC Campaigns', 'Meta Ads', 'TikTok Ads', 'Retargeting', 'Conversion Optimization'],
             ],
             (object)[
-                'title' => 'Digital Marketing',
-                'slug' => 'digital-marketing',
-                'description' => 'Data-driven marketing strategies that put your brand in front of the right people at the right time. SEO, PPC, content, and beyond.',
-                'sub_services' => ['SEO', 'PPC', 'Content Strategy', 'Social Media', 'Email Marketing', 'Analytics'],
+                'title' => 'Commercial Photography',
+                'slug' => 'commercial-photography',
+                'description' => 'High-end visual storytelling for your brand. We capture stunning product, lifestyle, and corporate photography that elevates your brand\'s perceived value.',
+                'sub_services' => ['Product Photography', 'Lifestyle Shoots', 'Corporate Portraits', 'Event Coverage', 'Retouching'],
+            ],
+            (object)[
+                'title' => 'Commercial Videography',
+                'slug' => 'commercial-videography',
+                'description' => 'Cinematic video production that captivates and converts. From punchy social reels to premium brand films, we bring your story to life in motion.',
+                'sub_services' => ['Brand Films', 'Social Reels', 'Product Promos', 'Documentary Style', 'Motion Graphics'],
             ],
         ]);
 
