@@ -1,4 +1,4 @@
-{{-- Announcement Bar --}}
+<!-- {{-- Announcement Bar --}}
 <div x-show="announcementVisible"
      x-transition:enter="transition ease-out duration-300"
      x-transition:enter-start="opacity-0 -translate-y-full"
@@ -23,4 +23,4 @@
             </svg>
         </button>
     </div>
-</div>
+</div> -->
