@@ -1,4 +1,4 @@
-{{-- Navbar — Kota-style minimal: Logo + tagline | Hire us + hamburger --}}
+{{-- Navbar — Kota-style minimal: Logo + Tagline | Hire us + hamburger --}}
 <nav x-data="{
         menuOpen: false,
         scrolled: false,
@@ -22,18 +22,21 @@
     <div class="relative z-50 max-w-[1440px] mx-auto px-5 md:px-8 lg:px-10">
         <div class="flex items-center justify-between h-[72px] md:h-[80px]">
 
-            {{-- LEFT: Logo + Tagline --}}
-            <div class="flex items-center gap-4 md:gap-6">
-                {{-- Diver Logo Image --}}
-                <a href="{{ route('home') }}" class="flex-shrink-0 group flex items-center" aria-label="DIVER.ENT Home">
-                    <img src="{{ asset('images/diver-logo.jpg') }}" alt="DIVER.ENT Logo" class="h-10 md:h-12 w-auto mix-blend-multiply opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-                </a>
+            {{-- LEFT: Logo + Tagline (lebih menyatu) --}}
+            <a href="{{ route('home') }}" class="flex items-center gap-3 md:gap-4 group" aria-label="DIVER.ENT Home">
+                {{-- Logo Image --}}
+                <img src="{{ asset('images/diver-logo.jpg') }}" 
+                     alt="DIVER.ENT Logo" 
+                     class="h-9 md:h-11 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90" />
 
-                {{-- Tagline (desktop only) --}}
-                <span class="hidden md:inline-block font-mono text-[11px] tracking-[0.08em] uppercase text-charcoal/60" style="letter-spacing: 0.1em;">
-                    Creative Agency · Est. 2013
-                </span>
-            </div>
+                {{-- Vertical divider + Tagline --}}
+                <div class="hidden md:flex items-center gap-3">
+                    <span class="w-px h-5 bg-charcoal/20"></span>
+                    <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-charcoal/40 whitespace-nowrap">
+                        Creative Agency · Est. 2013
+                    </span>
+                </div>
+            </a>
 
             {{-- RIGHT: Hire Us button + Hamburger --}}
             <div class="flex items-center gap-3 md:gap-4">
@@ -50,7 +53,6 @@
                         class="relative w-[46px] h-[46px] md:w-[50px] md:h-[50px] rounded-full border-2 border-charcoal flex items-center justify-center group transition-all duration-300"
                         :class="menuOpen ? 'bg-charcoal' : 'bg-transparent'"
                         aria-label="Toggle navigation menu">
-                    {{-- Hamburger lines / X morph (2 lines, GPU accelerated) --}}
                     <div class="w-[18px] md:w-[20px] h-[12px] flex flex-col justify-between items-center overflow-visible">
                         <span class="block w-full h-[2px] rounded-full bg-charcoal transform transition-all duration-500 ease-in-out origin-center"
                               :class="menuOpen ? 'translate-y-[5px] rotate-45 !bg-cream' : ''"></span>
@@ -63,9 +65,7 @@
         </div>
     </div>
 
-    {{-- ═══════════════════════════════════════════════════════ --}}
-    {{-- FLOATING DROPDOWN MENU PANEL (kota-style) --}}
-    {{-- ═══════════════════════════════════════════════════════ --}}
+    {{-- MENU DROPDOWN (sama seperti sebelumnya) --}}
     <div x-show="menuOpen"
          x-transition:enter="transition ease-out duration-500"
          x-transition:enter-start="opacity-0 -translate-y-4 scale-90"
@@ -79,7 +79,6 @@
 
         <div class="bg-white rounded-2xl shadow-[0_16px_64px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.04] overflow-hidden">
             
-            {{-- Navigation Links --}}
             <div class="px-6 py-6 pb-4 space-y-0">
                 <a href="{{ route('work') }}"
                    @click="close()"
@@ -106,7 +105,6 @@
                     Agency
                 </a>
 
-                {{-- Services with expand --}}
                 <div x-show="menuOpen"
                      x-transition:enter="transition ease-out duration-500 delay-[150ms]"
                      x-transition:enter-start="opacity-0 translate-y-4"
@@ -184,7 +182,6 @@
                 </a>
             </div>
 
-            {{-- Start Your Project CTA --}}
             <div class="px-6 pt-3 pb-6"
                  x-show="menuOpen"
                  x-transition:enter="transition ease-out duration-500 delay-[350ms]"
@@ -197,7 +194,6 @@
                    @click="close()"
                    class="inline-flex items-center gap-3 px-5 py-3 rounded-full border-2 border-charcoal text-charcoal font-sans text-[15px] font-medium hover:border-accent hover:text-accent hover:shadow-[0_0_15px_rgba(20,200,240,0.15)] transition-all duration-300 group">
                     Start your project
-                    {{-- Circle arrow icon like kota --}}
                     <span class="w-7 h-7 rounded-full border border-charcoal/30 flex items-center justify-center group-hover:border-accent/50 transition-colors">
                         <svg class="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
