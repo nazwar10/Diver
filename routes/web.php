@@ -11,6 +11,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StartProjectController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SectorController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminProjectController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -63,3 +65,23 @@ Route::get('/faqs', function () {
     ]);
     return view('pages.faqs', compact('faqItems'));
 })->name('faqs');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [AdminAuthController::class, 'create'])->name('login');
+        Route::post('/login', [AdminAuthController::class, 'store'])->name('login.store');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [AdminAuthController::class, 'destroy'])->name('logout');
+
+        Route::middleware('admin')->group(function () {
+            Route::redirect('/', '/admin/projects');
+            Route::get('/projects', [AdminProjectController::class, 'index'])->name('projects.index');
+            Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('projects.create');
+            Route::post('/projects', [AdminProjectController::class, 'store'])->name('projects.store');
+            Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])->name('projects.edit');
+            Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('projects.update');
+        });
+    });
+});

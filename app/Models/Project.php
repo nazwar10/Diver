@@ -14,10 +14,17 @@ class Project extends Model
     protected $fillable = [
         'slug',
         'title',
+        'client_name',
         'year',
         'tagline',
+        'timeline',
         'description',
+        'challenge',
+        'solution',
         'thumbnail_path',
+        'hero_image_path',
+        'gallery_images',
+        'services_used',
         'video_url',
         'video_poster',
         'is_featured',
@@ -28,8 +35,10 @@ class Project extends Model
     ];
 
     protected $casts = [
+        'gallery_images' => 'array',
         'is_featured' => 'boolean',
         'published_at' => 'datetime',
+        'services_used' => 'array',
         'year' => 'integer',
     ];
 
@@ -66,5 +75,15 @@ class Project extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('order');
+    }
+
+    public function getServiceAttribute(): string
+    {
+        return $this->services->pluck('name')->implode(', ');
+    }
+
+    public function getSectorAttribute(): string
+    {
+        return $this->sectors->pluck('name')->implode(', ');
     }
 }
