@@ -21,11 +21,44 @@
 
 <section class="pb-16 bg-cream">
     <div class="max-w-content mx-auto px-6 md:px-8">
-        <div class="aspect-[16/9] bg-cream-2 rounded-xl overflow-hidden mb-16" data-reveal>
+        <!-- <div class="aspect-[16/9] bg-cream-2 rounded-xl overflow-hidden mb-16" data-reveal>
             <div class="w-full h-full bg-gradient-to-br from-cream-2 to-light/30 flex items-center justify-center">
                 <span class="font-serif text-6xl text-light/40">{{ $project->title }}</span>
             </div>
+        </div> -->
+
+                <div class="aspect-[16/9] rounded-xl overflow-hidden mb-16" data-reveal>
+
+                    @if($project->hero_image_path)
+
+                        <img
+                            src="{{ $project->hero_image_path }}"
+                            alt="{{ $project->title }}"
+                            class="w-full h-full object-cover"
+                        >
+
+                    @else
+
+                        <div class="w-full h-full bg-gradient-to-br from-cream-2 to-light/30 flex items-center justify-center">
+                            <span class="font-serif text-6xl text-light/40">
+                                {{ $project->title }}
+                            </span>
+                        </div>
+
+                    @endif
+
+                </div>
+
+        @if($project->description)
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+            <div class="md:col-span-4" data-reveal>
+                <h2 class="font-serif text-h3 text-charcoal mb-4">Overview</h2>
+            </div>
+            <div class="md:col-span-8" data-reveal>
+                <p class="text-mid text-lg leading-relaxed">{{ $project->description }}</p>
+            </div>
         </div>
+        @endif
 
         @if(isset($project->challenge))
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
@@ -37,6 +70,41 @@
             </div>
         </div>
         @endif
+
+
+                @if(!empty($project->gallery_images))
+
+                <section class="pb-20 bg-cream">
+
+                    <div class="max-w-content mx-auto px-6 md:px-8">
+
+                        <h2 class="font-serif text-h3 text-charcoal mb-8" data-reveal>
+                            Gallery
+                        </h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            @foreach($project->gallery_images as $image)
+
+                                <div class="overflow-hidden rounded-xl" data-reveal>
+                                    <img
+                                        src="{{ $image }}"
+                                        alt="{{ $project->title }}"
+                                        class="w-full h-full object-cover"
+                                    >
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                @endif
+
+
 
         @if(isset($project->solution))
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">

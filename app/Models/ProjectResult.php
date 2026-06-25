@@ -32,4 +32,14 @@ class ProjectResult extends Model
     {
         return $query->orderBy('order');
     }
+
+    public function getMetricAttribute(): string
+    {
+        return (string) $this->percentage;
+    }
+
+    public function getLabelAttribute(): string
+    {
+        return (string) $this->description;
+    }
 }

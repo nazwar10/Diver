@@ -26,51 +26,45 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // ─── Admin User ─────────────────────────────────────────────
-        $admin = User::factory()->create([
-            'name'  => 'DIVER.ENT Admin',
-            'email' => 'admin@diverent.agency',
-        ]);
+        $this->call(AdminUserSeeder::class);
+
+        $admin = User::where('email', 'admin@diverent.agency')->firstOrFail();
 
         // ─── Services (3) ───────────────────────────────────────────
-        $services = collect([
-            [
-                'slug'        => 'branding-identity',
-                'name'        => 'Branding & Identity',
-                'tagline'     => 'Forge brands that resonate and endure.',
-                'description' => 'We build brand ecosystems from the ground up — strategy, visual identity, verbal identity, and brand guidelines — giving your business a distinct presence that connects emotionally with your audience and stands apart in the market.',
-                'order'       => 1,
-                'subs'        => [
-                    ['name' => 'Brand Strategy', 'slug' => 'brand-strategy', 'description' => 'Market positioning, competitive analysis, and brand architecture that defines your unique place in the landscape.', 'order' => 1],
-                    ['name' => 'Visual Identity', 'slug' => 'visual-identity', 'description' => 'Logo systems, color palettes, typography, and graphic language that make your brand instantly recognizable.', 'order' => 2],
-                    ['name' => 'Verbal Identity', 'slug' => 'verbal-identity', 'description' => 'Tone of voice, messaging frameworks, and copywriting guidelines that ensure consistency across every touchpoint.', 'order' => 3],
-                    ['name' => 'Brand Guidelines', 'slug' => 'brand-guidelines', 'description' => 'Comprehensive documentation that empowers your team and partners to represent your brand with precision.', 'order' => 4],
-                ],
-            ],
-            [
-                'slug'        => 'digital-experience',
-                'name'        => 'Digital Experience',
-                'tagline'     => 'Craft digital experiences that captivate and convert.',
-                'description' => 'From responsive websites to immersive web applications, we design and develop digital products that delight users, drive engagement, and deliver measurable business outcomes through thoughtful UX and modern technology.',
-                'order'       => 2,
-                'subs'        => [
-                    ['name' => 'UX/UI Design', 'slug' => 'ux-ui-design', 'description' => 'User research, wireframing, prototyping, and interface design focused on intuitive and delightful user journeys.', 'order' => 1],
-                    ['name' => 'Web Development', 'slug' => 'web-development', 'description' => 'Full-stack development using modern frameworks, delivering fast, secure, and scalable web applications.', 'order' => 2],
-                    ['name' => 'E-Commerce', 'slug' => 'e-commerce', 'description' => 'Custom online storefronts optimized for conversion, inventory management, and seamless checkout experiences.', 'order' => 3],
-                ],
-            ],
-            [
-                'slug'        => 'creative-content',
-                'name'        => 'Creative Content',
-                'tagline'     => 'Tell stories that move people to action.',
-                'description' => 'We produce high-impact creative content — from cinematic video production and motion graphics to photography and social media campaigns — that amplifies your brand story, builds community, and drives results across every platform.',
-                'order'       => 3,
-                'subs'        => [
-                    ['name' => 'Video Production', 'slug' => 'video-production', 'description' => 'End-to-end video creation including concept development, filming, editing, and post-production for commercials, brand films, and social content.', 'order' => 1],
-                    ['name' => 'Motion Graphics', 'slug' => 'motion-graphics', 'description' => '2D and 3D animation, kinetic typography, and visual effects that bring ideas to life with movement and energy.', 'order' => 2],
-                    ['name' => 'Social Media Strategy', 'slug' => 'social-media-strategy', 'description' => 'Platform-specific content strategies, calendar planning, community management, and performance analytics.', 'order' => 3],
-                ],
-            ],
-        ]);
+       $services = collect([
+    [
+        'slug'        => 'social-media-management',
+        'name'        => 'Social Media Management',
+        'tagline'     => 'Build meaningful connections through strategic social media.',
+        'description' => 'We manage and grow your social media presence with content planning, audience engagement, community management, and performance reporting designed to strengthen your brand and increase customer interaction.',
+        'order'       => 1,
+        'subs'        => [],
+    ],
+    [
+        'slug'        => 'digital-ads',
+        'name'        => 'Digital Ads',
+        'tagline'     => 'Reach the right audience at the right time.',
+        'description' => 'From Meta Ads to Google Ads, we create data-driven advertising campaigns that generate awareness, leads, and conversions while maximizing your marketing budget.',
+        'order'       => 2,
+        'subs'        => [],
+    ],
+    [
+        'slug'        => 'commercial-photography',
+        'name'        => 'Commercial Photography',
+        'tagline'     => 'Showcase your brand with professional visual storytelling.',
+        'description' => 'We produce high-quality commercial photography for products, brands, events, hospitality, and corporate needs, helping businesses create a strong and credible visual identity.',
+        'order'       => 3,
+        'subs'        => [],
+    ],
+    [
+        'slug'        => 'commercial-videography',
+        'name'        => 'Commercial Videography',
+        'tagline'     => 'Create impactful videos that engage and inspire.',
+        'description' => 'From promotional videos and company profiles to social media content and advertisements, we craft compelling video content that helps brands communicate effectively and stand out.',
+        'order'       => 4,
+        'subs'        => [],
+    ],
+]);
 
         $serviceModels = [];
         foreach ($services as $serviceData) {

@@ -2,50 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Testimonial;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
     public function index()
     {
         // Featured projects for the work section
-        $featuredProjects = collect([
-            (object)[
-                'id' => 1, 'title' => 'Meridian Hotels', 'slug' => 'meridian-hotels',
-                'tagline' => 'Luxury redefined through digital craft',
-                'year' => '2025', 'service' => 'Web Design', 'sector' => 'Hospitality',
-                'thumbnail' => '/images/projects/meridian.jpg',
-                'results_metric' => '67.6%', 'results_label' => 'increase in direct bookings',
-            ],
-            (object)[
-                'id' => 2, 'title' => 'Volta Energy', 'slug' => 'volta-energy',
-                'tagline' => 'Powering the future with bold identity',
-                'year' => '2025', 'service' => 'Branding', 'sector' => 'Energy',
-                'thumbnail' => '/images/projects/volta.jpg',
-                'results_metric' => '70.8%', 'results_label' => 'brand recognition uplift',
-            ],
-            (object)[
-                'id' => 3, 'title' => 'Aura Skincare', 'slug' => 'aura-skincare',
-                'tagline' => 'Beauty meets conversion-first ecommerce',
-                'year' => '2024', 'service' => 'Web Design', 'sector' => 'Beauty & Wellness',
-                'thumbnail' => '/images/projects/aura.jpg',
-                'results_metric' => '83.14%', 'results_label' => 'increase in online sales',
-            ],
-            (object)[
-                'id' => 4, 'title' => 'Kinetic Sports', 'slug' => 'kinetic-sports',
-                'tagline' => 'A brand that moves as fast as its athletes',
-                'year' => '2024', 'service' => 'Digital Marketing', 'sector' => 'Sports & Fitness',
-                'thumbnail' => '/images/projects/kinetic.jpg',
-                'results_metric' => '104.9%', 'results_label' => 'growth in organic traffic',
-            ],
-            (object)[
-                'id' => 5, 'title' => 'Craft & Co', 'slug' => 'craft-and-co',
-                'tagline' => 'Artisanal spirits deserve an artisanal web presence',
-                'year' => '2024', 'service' => 'Branding', 'sector' => 'Food & Drink',
-                'thumbnail' => '/images/projects/craft.jpg',
-                'results_metric' => '52.3%', 'results_label' => 'increase in engagement',
-            ],
-        ]);
+        $featuredProjects = Project::query()
+            ->with(['results', 'services', 'sectors'])
+            ->published()
+            ->featured()
+            ->ordered()
+            ->take(5)
+            ->get()
+            ->map(function (Project $project) {
+                $result = $project->results->first();
+
+                return (object) [
+                    'id' => $project->id,
+                    'title' => $project->title,
+                    'slug' => $project->slug,
+                    'tagline' => $project->tagline,
+                    'year' => $project->year,
+                    'service' => $project->service,
+                    'sector' => $project->sector,
+                    'thumbnail' => $project->thumbnail_path ?: '/images/projects/default.jpg',
+                    'results_metric' => $result?->metric ?? '',
+                    'results_label' => $result ? Str::lower($result->label) : '',
+                ];
+            });
 
         // Services data
         $services = collect([
@@ -79,7 +67,7 @@ class HomeController extends Controller
         $brandPillars = collect([
             (object)[
                 'number' => '01', 'title' => 'Brand-Led Design',
-                'description' => 'Every pixel is informed by strategy. We don\'t just make things look good—we make them work hard for your brand, ensuring consistency across every touchpoint.',
+                'description' => 'Every pixel is informed by strategy. We don\'t just make things look goodâ€”we make them work hard for your brand, ensuring consistency across every touchpoint.',
                 'image' => '/images/pillars/brand-led.jpg',
             ],
             (object)[
@@ -100,12 +88,20 @@ class HomeController extends Controller
         ]);
 
         // Project results for the dark section
-        $projectResults = collect([
-            (object)['metric' => '67.6', 'suffix' => '%', 'description' => 'increase in direct bookings for Meridian Hotels', 'project_slug' => 'meridian-hotels'],
-            (object)['metric' => '70.8', 'suffix' => '%', 'description' => 'brand recognition uplift for Volta Energy', 'project_slug' => 'volta-energy'],
-            (object)['metric' => '83.14', 'suffix' => '%', 'description' => 'increase in online sales for Aura Skincare', 'project_slug' => 'aura-skincare'],
-            (object)['metric' => '104.9', 'suffix' => '%', 'description' => 'growth in organic traffic for Kinetic Sports', 'project_slug' => 'kinetic-sports'],
-        ]);
+        $projectResults = $featuredProjects
+            ->filter(fn ($project) => filled($project->results_metric))
+            ->take(4)
+            ->map(function ($project) {
+                preg_match('/^([0-9]+(?:\.[0-9]+)?)(.*)$/', $project->results_metric, $matches);
+
+                return (object) [
+                    'metric' => $matches[1] ?? '0',
+                    'suffix' => trim($matches[2] ?? '') ?: '%',
+                    'description' => trim($project->results_label . ' for ' . $project->title),
+                    'project_slug' => $project->slug,
+                ];
+            })
+            ->values();
 
         // Partners
         $partners = collect([
@@ -115,30 +111,27 @@ class HomeController extends Controller
         ]);
 
         // Testimonials
-        $testimonials = collect([
-            (object)[
-                'quote' => 'DIVER.ENT completely transformed our digital presence. The new website didn\'t just look incredible—it drove a 67% increase in direct bookings within three months.',
-                'name' => 'Sarah Mitchell', 'role' => 'Marketing Director', 'company' => 'Meridian Hotels',
-                'project_slug' => 'meridian-hotels',
-            ],
-            (object)[
-                'quote' => 'Working with DIVER.ENT felt like having an extension of our own team. They truly understood our vision and translated it into a brand identity that exceeds everything we imagined.',
-                'name' => 'James Chen', 'role' => 'CEO', 'company' => 'Volta Energy',
-                'project_slug' => 'volta-energy',
-            ],
-            (object)[
-                'quote' => 'The attention to detail is unmatched. Every interaction, every animation, every word—it all feels intentional. Our customers notice the difference and so does our bottom line.',
-                'name' => 'Emma Rodriguez', 'role' => 'Founder', 'company' => 'Aura Skincare',
-                'project_slug' => 'aura-skincare',
-            ],
-        ]);
+        $testimonials = Testimonial::query()
+            ->with('project')
+            ->whereHas('project')
+            ->featured()
+            ->ordered()
+            ->take(3)
+            ->get()
+            ->map(fn ($testimonial) => (object) [
+                'quote' => $testimonial->quote,
+                'name' => $testimonial->client_name,
+                'role' => $testimonial->client_role,
+                'company' => $testimonial->client_company,
+                'project_slug' => $testimonial->project?->slug,
+            ]);
 
         // Latest blog posts
         $latestPosts = collect([
             (object)[
                 'id' => 1, 'title' => 'The Death of Generic Design: Why Bespoke is the Only Way Forward',
                 'slug' => 'death-of-generic-design', 'category' => 'Design',
-                'excerpt' => 'In an era of templates and AI-generated layouts, we explore why custom design isn\'t just a luxury—it\'s a competitive necessity.',
+                'excerpt' => 'In an era of templates and AI-generated layouts, we explore why custom design isn\'t just a luxuryâ€”it\'s a competitive necessity.',
                 'cover_image' => '/images/blog/generic-design.jpg',
                 'published_at' => now()->subDays(3),
                 'author' => (object)['name' => 'Alex Turner', 'avatar' => '/images/team/alex.jpg'],
@@ -165,7 +158,7 @@ class HomeController extends Controller
         $faqItems = collect([
             (object)[
                 'question' => 'How much does a website cost?',
-                'answer' => 'Every project is unique, so we don\'t believe in one-size-fits-all pricing. Our web design projects typically range from £15,000 to £80,000+ depending on complexity, features, and scope. We\'ll provide a detailed proposal after our initial discovery call.',
+                'answer' => 'Every project is unique, so we don\'t believe in one-size-fits-all pricing. Our web design projects typically range from Â£15,000 to Â£80,000+ depending on complexity, features, and scope. We\'ll provide a detailed proposal after our initial discovery call.',
             ],
             (object)[
                 'question' => 'How long does a typical project take?',
@@ -173,7 +166,7 @@ class HomeController extends Controller
             ],
             (object)[
                 'question' => 'Do you work with startups or only established brands?',
-                'answer' => 'We work with businesses at every stage—from ambitious startups looking to make their mark to established enterprises ready for a digital transformation. What matters most to us is your ambition and willingness to invest in doing things properly.',
+                'answer' => 'We work with businesses at every stageâ€”from ambitious startups looking to make their mark to established enterprises ready for a digital transformation. What matters most to us is your ambition and willingness to invest in doing things properly.',
             ],
             (object)[
                 'question' => 'What happens after the website launches?',
@@ -181,11 +174,11 @@ class HomeController extends Controller
             ],
             (object)[
                 'question' => 'Do you offer SEO and marketing services?',
-                'answer' => 'Absolutely. Our digital marketing team works alongside our designers and developers to ensure your website isn\'t just beautiful—it\'s discoverable. We offer SEO, PPC, content strategy, social media management, and more.',
+                'answer' => 'Absolutely. Our digital marketing team works alongside our designers and developers to ensure your website isn\'t just beautifulâ€”it\'s discoverable. We offer SEO, PPC, content strategy, social media management, and more.',
             ],
             (object)[
                 'question' => 'What\'s your design process like?',
-                'answer' => 'Our process is collaborative and transparent. We follow a proven framework: Discovery → Strategy → Design → Development → Testing → Launch. You\'ll have regular check-ins, access to our project portal, and opportunities for feedback at every stage.',
+                'answer' => 'Our process is collaborative and transparent. We follow a proven framework: Discovery â†’ Strategy â†’ Design â†’ Development â†’ Testing â†’ Launch. You\'ll have regular check-ins, access to our project portal, and opportunities for feedback at every stage.',
             ],
         ]);
 
