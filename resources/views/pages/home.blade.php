@@ -130,134 +130,36 @@
                     </div>
                     
                     {{-- Right Image Placeholder --}}
-                    <div class="w-full lg:w-[55%] rounded-[1.5rem] bg-gradient-to-br {{ $index % 2 == 0 ? 'from-[#F4F6F9] to-[#E9EDF2]' : 'from-[#E9EDF2] to-[#F4F6F9]' }} min-h-[250px] lg:min-h-[350px] flex items-center justify-center relative overflow-hidden group/img transition-all duration-1000 delay-[200ms] translate-y-12 opacity-0 group-[.revealed]/card:translate-y-0 group-[.revealed]/card:opacity-100 scale-95 group-[.revealed]/card:scale-100">
-                        <div class="absolute inset-0 opacity-[0.03] mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
-                        <div class="font-serif text-2xl md:text-3xl text-charcoal/20 font-bold mix-blend-multiply group-hover/img:scale-105 transition-transform duration-700 text-center px-8">{{ $service->title }}<br><span class="font-sans text-xl font-normal opacity-50">Visual Asset</span></div>
-                    </div>
-                </div>
+                   {{-- Right Image --}}
+<div class="w-full lg:w-[55%] rounded-[1.5rem] overflow-hidden min-h-[250px] lg:min-h-[350px] relative group/img transition-all duration-1000 delay-[200ms] translate-y-12 opacity-0 group-[.revealed]/card:translate-y-0 group-[.revealed]/card:opacity-100 scale-95 group-[.revealed]/card:scale-100">
+    @if($service->title == 'Commercial Videography')
+        {{-- Video untuk Commercial Videography --}}
+        <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700">
+            <source src="/images/cv.mp4" type="video/mp4">
+            {{-- Fallback jika video tidak bisa diputar --}}
+            <img src="/images/cv.jpg" alt="{{ $service->title }}" class="w-full h-full object-cover">
+        </video>
+    @else
+        {{-- Gambar untuk service lainnya --}}
+        @php
+            $serviceImages = [
+                'Social Media Management' => '/images/s.jpg',
+                'Digital Ads' => '/images/d.jpg',
+                'Commercial Photography' => '/images/cf.jpg',
+            ];
+            $imagePath = $serviceImages[$service->title] ?? '/images/1.jpg';
+        @endphp
+        <img src="{{ $imagePath }}" 
+             alt="{{ $service->title }}" 
+             class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700">
+    @endif
+</div>        </div>
                 
             </div>
             @endforeach
         </div>
     </div>
 </section>
-
-{{-- ═══════════════════════════════════════════════════════ --}}
-{{-- SECTION 4: MANIFESTO (Brand-led) --}}
-{{-- ═══════════════════════════════════════════════════════ --}}
-<section id="manifesto" class="relative py-24 md:py-32 lg:py-48 bg-transparent z-20 border-t-2 border-charcoal/30 border-b-2">
-    <div class="max-w-[1440px] mx-auto px-6 md:px-12 w-full">
-        
-        {{-- Section Heading --}}
-        <div class="w-full mb-32 md:mb-48 text-center md:text-left" data-reveal>
-            <h2 class="font-sans text-[12vw] lg:text-[7.5vw] font-medium leading-[0.9] tracking-tight text-charcoal">
-                Brand-led.<br>Strategically<br>built.
-            </h2>
-        </div>
-
-        <div class="flex flex-col">
-            
-            {{-- Block 01 --}}
-            <div class="manifesto-block relative flex flex-col lg:flex-row justify-between items-center py-12 md:py-16 lg:py-20 border-b-2 border-charcoal/30 overflow-visible group/block">
-                {{-- Left: Typography --}}
-                <div class="w-full lg:w-[45%] z-10 pointer-events-none" data-reveal>
-                    <div class="font-sans text-xl md:text-2xl text-charcoal mb-4 md:mb-6 font-medium">01/</div>
-                    <h3 class="font-sans text-[10vw] lg:text-[6.5vw] font-medium leading-[0.9] tracking-tight text-charcoal transition-transform duration-700 group-hover/block:translate-x-4">
-                        Design with<br>guts.
-                    </h3>
-                </div>
-                
-                {{-- Right: Paragraph --}}
-                <div class="w-full lg:w-[40%] z-10 mt-12 lg:mt-0 pointer-events-none text-right lg:text-left" data-reveal>
-                    <p class="font-sans text-xl md:text-[1.75rem] text-charcoal leading-[1.3] font-normal mix-blend-multiply drop-shadow-sm">
-                        We build immersive, brand-led digital experiences that wow and work hard. The kind that raises eyebrows, sparks emotion, and moves people to act.
-                    </p>
-                </div>
-
-                {{-- Center: Floating Mouse Box --}}
-                <div class="manifesto-img absolute top-1/2 left-1/2 w-[200px] md:w-[280px] aspect-square rounded-[2rem] bg-gradient-to-tr from-accent-lime via-[#FFD166] to-accent-pink shadow-2xl overflow-hidden z-0 pointer-events-none transition-transform duration-[50ms] ease-linear" style="transform: translate(-50%, -50%); will-change: transform;">
-                    <div class="parallax-shape absolute top-8 right-8 w-24 h-12 bg-white/30 backdrop-blur-md rounded-lg border border-white/40" data-speed="0.1"></div>
-                    <div class="parallax-shape absolute bottom-12 left-8 w-32 h-40 bg-charcoal/80 backdrop-blur-md rounded-xl border border-white/10" data-speed="-0.15"></div>
-                </div>
-            </div>
-
-            {{-- Block 02 --}}
-            <div class="manifesto-block relative flex flex-col lg:flex-row justify-between items-center py-12 md:py-16 lg:py-20 border-b-2 border-charcoal/30 overflow-visible group/block">
-                {{-- Left: Typography --}}
-                <div class="w-full lg:w-[45%] z-10 pointer-events-none" data-reveal>
-                    <div class="font-sans text-xl md:text-2xl text-charcoal mb-4 md:mb-6 font-medium">02/</div>
-                    <h3 class="font-sans text-[10vw] lg:text-[6.5vw] font-medium leading-[0.9] tracking-tight text-charcoal transition-transform duration-700 group-hover/block:translate-x-4">
-                        Nail the<br>process.
-                    </h3>
-                </div>
-                
-                {{-- Right: Paragraph --}}
-                <div class="w-full lg:w-[40%] z-10 mt-12 lg:mt-0 pointer-events-none text-right lg:text-left" data-reveal>
-                    <p class="font-sans text-xl md:text-[1.75rem] text-charcoal leading-[1.3] font-normal mix-blend-multiply drop-shadow-sm">
-                        We’re collaborative, decisive, and clear from day one. You’ll feel the momentum. You’ll know where you stand. You’ll have a team that knows when to lead, and when to listen.
-                    </p>
-                </div>
-
-                {{-- Center: Floating Mouse Box --}}
-                <div class="manifesto-img absolute top-1/2 left-1/2 w-[200px] md:w-[280px] aspect-square rounded-[2rem] bg-gradient-to-tr from-cyan-300 via-teal-300 to-emerald-400 shadow-2xl overflow-hidden z-0 pointer-events-none transition-transform duration-[50ms] ease-linear" style="transform: translate(-50%, -50%); will-change: transform;">
-                    <div class="parallax-shape absolute top-12 left-12 w-40 h-16 bg-white/30 backdrop-blur-md rounded-xl border border-white/40" data-speed="0.12"></div>
-                    <div class="parallax-shape absolute bottom-8 right-8 w-24 h-24 rounded-full bg-white/20 backdrop-blur-md border border-white/30" data-speed="-0.1"></div>
-                </div>
-            </div>
-
-            {{-- Block 03 --}}
-            <div class="manifesto-block relative flex flex-col lg:flex-row justify-between items-center py-12 md:py-16 lg:py-20 border-b-2 border-charcoal/30 overflow-visible group/block">
-                {{-- Left: Typography --}}
-                <div class="w-full lg:w-[45%] z-10 pointer-events-none" data-reveal>
-                    <div class="font-sans text-xl md:text-2xl text-charcoal mb-4 md:mb-6 font-medium">03/</div>
-                    <h3 class="font-sans text-[10vw] lg:text-[6.5vw] font-medium leading-[0.9] tracking-tight text-charcoal transition-transform duration-700 group-hover/block:translate-x-4">
-                        Build to<br>flex.
-                    </h3>
-                </div>
-                
-                {{-- Right: Paragraph --}}
-                <div class="w-full lg:w-[40%] z-10 mt-12 lg:mt-0 pointer-events-none text-right lg:text-left" data-reveal>
-                    <p class="font-sans text-xl md:text-[1.75rem] text-charcoal leading-[1.3] font-normal mix-blend-multiply drop-shadow-sm">
-                        We’re ready for your growth. In fact, we’re rooting for it. Whether it’s a new campaign, product, or pivot, we make sure your digital presence is set up to flex with you.
-                    </p>
-                </div>
-
-                {{-- Center: Floating Mouse Box --}}
-                <div class="manifesto-img absolute top-1/2 left-1/2 w-[200px] md:w-[280px] aspect-square rounded-[2rem] bg-gradient-to-tr from-indigo-300 via-violet-300 to-fuchsia-300 shadow-2xl overflow-hidden z-0 pointer-events-none transition-transform duration-[50ms] ease-linear" style="transform: translate(-50%, -50%); will-change: transform;">
-                    <div class="parallax-shape absolute inset-x-8 top-1/2 -translate-y-1/2 h-32 bg-white/20 backdrop-blur-lg rounded-2xl border border-white/40" data-speed="0.08"></div>
-                </div>
-            </div>
-
-            {{-- Block 04 --}}
-            <div class="manifesto-block relative flex flex-col lg:flex-row justify-between items-center py-12 md:py-16 lg:py-20 overflow-visible group/block">
-                {{-- Left: Typography --}}
-                <div class="w-full lg:w-[45%] z-10 pointer-events-none" data-reveal>
-                    <div class="font-sans text-xl md:text-2xl text-charcoal mb-4 md:mb-6 font-medium">04/</div>
-                    <h3 class="font-sans text-[10vw] lg:text-[6.5vw] font-medium leading-[0.9] tracking-tight text-charcoal transition-transform duration-700 group-hover/block:translate-x-4">
-                        Create to<br>convert.
-                    </h3>
-                </div>
-                
-                {{-- Right: Paragraph --}}
-                <div class="w-full lg:w-[40%] z-10 mt-12 lg:mt-0 pointer-events-none text-right lg:text-left" data-reveal>
-                    <p class="font-sans text-xl md:text-[1.75rem] text-charcoal leading-[1.3] font-normal mix-blend-multiply drop-shadow-sm">
-                        We sweat the small stuff. From brand visuals to UX flow, every decision is intentional—designed to boost engagement, drive conversions, and build brand equity.
-                    </p>
-                </div>
-
-                {{-- Center: Floating Mouse Box --}}
-                <div class="manifesto-img absolute top-1/2 left-1/2 w-[200px] md:w-[280px] aspect-square rounded-[2rem] bg-gradient-to-tr from-[#FF9A9E] to-[#FECFEF] shadow-2xl overflow-hidden z-0 pointer-events-none transition-transform duration-[50ms] ease-linear" style="transform: translate(-50%, -50%); will-change: transform;">
-                    <div class="parallax-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/30 backdrop-blur-md rounded-full border border-white/40" data-speed="-0.12"></div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- ═══════════════════════════════════════════════════════ --}}
-{{-- SECTION 5: OUR WORK — PORTFOLIO CARDS --}}
-{{-- ═══════════════════════════════════════════════════════ --}}
 <section id="work" class="py-24 md:py-32">
     <div class="max-w-content mx-auto px-6 md:px-8">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-24 gap-8">

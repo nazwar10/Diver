@@ -20,9 +20,9 @@ class StartProjectRequest extends FormRequest
             'phone'         => ['nullable', 'string', 'max:50'],
             'website_url'   => ['nullable', 'url', 'max:255'],
             'project_type'  => ['required', 'array', 'min:1'],
-            'project_type.*'=> ['string', 'in:web-design,branding,digital-marketing,ecommerce,sitecare,other'],
-            'budget_range'  => ['required', 'string', 'in:10k-25k,25k-50k,50k-100k,100k+'],
-            'timeline'      => ['nullable', 'string', 'in:asap,1-2-months,3-4-months,6-months+,flexible'],
+            'project_type.*'=> ['string', 'in:Web Design & Development,Branding & Identity,Digital Marketing,Ecommerce,SEO & Content,Brand Strategy'],
+            'budget_range'  => ['required', 'string'],
+            'timeline'      => ['nullable', 'string'],
             'project_brief' => ['required', 'string', 'min:20', 'max:5000'],
             'how_found'     => ['nullable', 'string', 'max:255'],
         ];
