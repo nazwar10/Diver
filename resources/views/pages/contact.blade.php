@@ -16,23 +16,26 @@
                 <h2 class="font-serif text-h3 text-charcoal mb-8">Get in touch</h2>
                 <div class="space-y-8">
                     <div>
-                        <span class="font-mono text-label uppercase tracking-wider text-accent block mb-2">Email</span>
-                        <button onclick="navigator.clipboard.writeText('hello@diver-ent.com'); this.innerText='Copied!'; setTimeout(()=>this.innerText='hello@diver-ent.com', 2000)" class="font-sans text-2xl text-charcoal hover:text-accent transition-colors cursor-pointer">hello@diver-ent.com</button>
+                        <span class="font-mono text-label uppercase tracking-wider text-accent block mb-2">Linkedin</span>
+                        <button onclick="navigator.clipboard.writeText('Diver Ent Infinit'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Diver Ent Infinit', 2000)" class="font-sans text-2xl text-charcoal hover:text-accent transition-colors cursor-pointer">Diver Ent Infinit</button>
                     </div>
                     <div>
                         <span class="font-mono text-label uppercase tracking-wider text-accent block mb-2">Phone</span>
-                        <a href="tel:+442079460958" class="font-sans text-2xl text-charcoal hover:text-accent transition-colors">+44 (0) 20 7946 0958</a>
+                        <a href="tel:+442079460958" class="font-sans text-2xl text-charcoal hover:text-accent transition-colors">+62 (0) 859-4047-4939</a>
                     </div>
                     <div>
                         <span class="font-mono text-label uppercase tracking-wider text-accent block mb-2">Address</span>
-                        <p class="font-sans text-lg text-charcoal">42 Shoreditch High Street<br>London, E1 6JJ</p>
+                        <p class="font-sans text-lg text-charcoal">Setia Budi<br>Medan, Sumatera Utara</p>
                     </div>
                     <div class="flex gap-4 pt-4">
-                        @foreach(['LinkedIn', 'Instagram', 'Facebook', 'Twitter'] as $social)
-                        <a href="#" class="w-12 h-12 rounded-full border border-light flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-cream hover:border-charcoal transition-all">
-                            <span class="text-xs font-mono">{{ substr($social, 0, 2) }}</span>
+                        <a href="https://www.linkedin.com/company/diver-ent-infinit/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-light flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-cream hover:border-charcoal transition-all" aria-label="LinkedIn">
+                            <span class="text-xs font-mono">LI</span>
                         </a>
-                        @endforeach
+                        <a href="https://www.instagram.com/diver.ent/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-light flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-cream hover:border-charcoal transition-all" aria-label="Instagram">
+                            <span class="text-xs font-mono">IG</span>
+                        </a>
+                       
+                       
                     </div>
                 </div>
             </div>

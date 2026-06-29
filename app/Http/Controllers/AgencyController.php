@@ -39,7 +39,7 @@ class AgencyController extends Controller
             'site_name' => 'DIVER.ENT',
             'mission' => 'We exist to make brands a damn site better.',
             'philosophy' => 'We believe that exceptional digital experiences are born from the intersection of bold creative thinking and rigorous strategic planning. Every project we take on is an opportunity to push boundaries, challenge conventions, and create something that truly matters.',
-            'email' => 'hello@diver-ent.com',
+            'Linkedin' => 'Diver Ent Infinit',
             'phone' => '+44 (0) 20 7946 0958',
         ];
 
